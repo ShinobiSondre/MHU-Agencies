@@ -1,5 +1,3 @@
-name: MHUAgencies
+name: MHU Agencies
 version: 1.0-SNAPSHOT
 main: mhuagencies.mhuagencies.MHUAgencies
-api-version: 2.10.0
-depend: []
