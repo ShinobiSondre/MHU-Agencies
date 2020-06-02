@@ -5,6 +5,7 @@ import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import me.robin.battlelevels.api.BattleLevelsAPI;
 import me.robin.battlelevels.core.BattleLevels;
 import me.robin.battlelevels.objects.BattlePlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -18,10 +19,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MHUAgencies extends JavaPlugin implements Listener {
 
-double expsharescore;
-double previousscore;
-Player killer;
-Player player;
+    double expsharescore;
+    double previousscore;
+    Player killer;
+    Player player;
 
     @Override
     public void onEnable() {
@@ -47,7 +48,7 @@ Player player;
     }
 
     public double onlinefactionmembers(){
-            int i = 0;
+        int i = 0;
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             if (player.hasPermission("expshare.lvl1") && !(player.getName().equals(killer.getName()))){
                 if (expsharescore == 0.0){expsharescore = (300);}
