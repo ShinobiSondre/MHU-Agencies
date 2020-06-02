@@ -1,0 +1,3 @@
+name: MHU Agencies
+version: ${project.version}
+main: mhuagencies.mhuagencies.MHUAgencies
