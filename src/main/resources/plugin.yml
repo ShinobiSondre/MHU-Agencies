@@ -1,3 +1,9 @@
 name: MHU Agencies
 version: ${project.version}
 main: mhuagencies.mhuagencies.MHUAgencies
+api-version: 2.10.0
+depend: [MythicMobs,BattleLevels,LuckPerms]
+softdepend: []
+commands:
+  agencydefenders:
+    description: spawns defenders
