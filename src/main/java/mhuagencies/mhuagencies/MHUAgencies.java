@@ -1,99 +1,36 @@
 package mhuagencies.mhuagencies;
 
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import me.robin.battlelevels.api.BattleLevelsAPI;
-import me.robin.battlelevels.core.BattleLevels;
-import me.robin.battlelevels.objects.BattlePlayer;
-
+import mhuagencies.mhuagencies.commands.CommandAgencyDefenders;
+import mhuagencies.mhuagencies.events.EventMythicMobDeath;
+import mhuagencies.mhuagencies.util.Util;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class MHUAgencies extends JavaPlugin implements Listener,CommandExecutor {
+import java.util.logging.Logger;
 
-    double expsharescore;
-    double previousscore;
-    Player killer;
-    Player player;
+public final class MHUAgencies extends JavaPlugin {
+
+    Logger logger;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-
-        System.out.print("--------------------------------------" + "\n" + "MHU-Agencies" + "\n" + "--------------------------------------");
-
-        getServer().getPluginManager().registerEvents(this, this);
-        this.getCommand("agencydefenders").setExecutor(new MHUAgencies());
+        Util util = new Util();
+        logger = Bukkit.getLogger();
+        logger.info("--------------------------------------" + "\n" + "MHU-Agencies" + "\n" + "--------------------------------------");
+        logger.info("Registering commands!");
+        commandLoader(util);
+        logger.info("Registering Events");
+        eventLoader(util);
     }
 
-
-
-    public ActiveMob spawnDefenders(String MobName, String killer) {
-
-        MobManager mm = MythicMobs.inst().getMobManager();
-
-        Location loc1 = new Location(Bukkit.getPlayer(killer).getWorld(), Bukkit.getPlayer(killer).getLocation().getX() + 4, Bukkit.getPlayer(killer).getLocation().getY(), Bukkit.getPlayer(killer).getLocation().getZ() + 4);
-
-        return mm.spawnMob(MobName, loc1);
+    public void eventLoader(Util util) {
+        getServer().getPluginManager().registerEvents(new EventMythicMobDeath(util), this);
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        Player player = (Player) sender;
-
-        if (command.getName().equalsignorecase("agencydefenders")) {
-
-            String[] mobs = {"D1,D2,D3,D4"};
-
-            if(mobs.equals("")){
-
-            }
-
-            for (int i = 0; i<5; i++) {
-                spawnDefenders(mobs[i],player.getName());
-            }
-            player.sendMessage("The Defenders have been placed");
-
-        }
-
-        return false;}
-
-
-        @EventHandler
-    public void AddExp(MythicMobDeathEvent d) throws InterruptedException {
-
-
-        killer = (Player) d.getKiller();
-        if (killer.hasPermission("expshare.lvl1")){
-            expsharescore = (300)+onlinefactionmembers() + 10;
-            if (expsharescore<50){expsharescore = 50;}
-        }
-
+    public void commandLoader(Util util) {
+        this.getCommand("agencydefenders").setExecutor(new CommandAgencyDefenders(util));
     }
-
-    public double onlinefactionmembers(){
-        int i = 0;
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if (player.hasPermission("expshare.lvl1") && !(player.getName().equals(killer.getName()))){
-                if (expsharescore == 0.0){expsharescore = (300);}
-                player.sendMessage("You gained" + ChatColor.GREEN + " "+ expsharescore + " points from " + killer.getDisplayName());
-                BattleLevelsAPI.addScore(player.getUniqueId(),expsharescore,true);
-
-            }
-
-            i++;}
-        return i;
-    }
-
 
 
     @Override

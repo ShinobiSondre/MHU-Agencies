@@ -7,3 +7,4 @@ softdepend: []
 commands:
   agencydefenders:
     description: spawns defenders
+    usage: /<command>
