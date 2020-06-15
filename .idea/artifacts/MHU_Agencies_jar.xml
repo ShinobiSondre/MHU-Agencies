@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MHU-Agencies:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MHU_Agencies_jar</output-path>
+    <root id="archive" name="MHU-Agencies.jar">
+      <element id="module-output" name="MHU-Agencies" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Dependencies/BattleLevels.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Dependencies/MythicMobs-4.4.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
