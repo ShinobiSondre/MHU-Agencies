@@ -1,3 +1,40 @@
-name: MHU Agencies
+name: AutomaticEvents
 version: 1.0-SNAPSHOT
-main: mhuagencies.mhuagencies.MHUAgencies
+main: mhuagencies.mhuagencies.AutomaticEvents
+api-version: 2.10.0
+depend: [MythicMobs,BattleLevels,LuckPerms,TitleManager]
+softdepend: []
+commands:
+  nomuraid:
+    description: joins the event
+    usage: /<command>
+  nomuraidquit:
+    description: quits the event
+    usage: /<command>
+  explodequit:
+    description: quits the event
+    usage: /<command>
+  explodejoin:
+    description: joins the event
+    usage: /<command>
+  quirk test:
+    description: Test a quirk
+    aliases: [qt,quirk]
+    usage: /quirk test [quirkgroup]
+  groups help:
+    description: Lists all the group commands
+    aliases: [groups,g help]
+    usage: /groups
+  groups list:
+    description: gives you a list of all the quirkgroups
+    aliases: [g]
+    usage: /<command>
+  groups search:
+    description: finds a specific group
+    aliases: [g search]
+    usage: /groupfind [quirkgroup]
+  groups add:
+    description: adds a specific group
+    aliases: [g add]
+    usage: /groupadd [quirkgroup]
+
